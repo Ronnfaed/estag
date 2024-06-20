@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Meu Aplicativo React</h1>
+        <h1 style={{ textAlign: "center" }}>PDF → JSON</h1>
       </header>
       <main>
         <FileUpload />

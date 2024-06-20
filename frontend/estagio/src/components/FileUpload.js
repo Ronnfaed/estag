@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './FileUpload.css'; // Importando o arquivo CSS
 
 const FileUpload = () => {
   const [file, setFile] = useState(null);
@@ -29,16 +30,16 @@ const FileUpload = () => {
   };
 
   return (
-    <div>
-      <h2>Upload PDF File</h2>
+    <div className="container">
+      <h2 style = {{textAlign: "center"}}>Escolha o PDF de exemplo</h2>
       <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} />
+        <input type="file" onChange={handleFileChange} style = {{display: "block", margin: "0 auto", marginBottom: "25x", marginTop: "25px"}}/>
         <button type="submit">Enviar</button>
       </form>
       
       {jsonResult && (
-        <div>
-          <h3>JSON Result</h3>
+        <div className="json-result">
+          <h3>Resultado em JSON</h3>
           <pre>{JSON.stringify(jsonResult, null, 2)}</pre>
         </div>
       )}

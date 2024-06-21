@@ -65,7 +65,15 @@ app.post('/upload', upload.single('pdf'), (req, res) => {
           if(indexGroup != -1) {
             const numberTexts = groupedData[indexGroup].texts.length;
             //se tiver mais de 3 textos na mesma linha, concatena o texto com o ultimo
-            if(numberTexts > 2) {
+            //se der ruim apaga daqui
+            if(groupedData[indexGroup].texts[numberTexts - 1].slice(-1) == '/') {
+              groupedData[indexGroup].texts[numberTexts - 1] = `${groupedData[indexGroup].texts[numberTexts - 1]}${text}`;
+            } else if(['mg', 'fL'].some((notToSkipVariable) => notToSkipVariable == text)) {
+              groupedData[indexGroup].texts[numberTexts - 1] = `${groupedData[indexGroup].texts[numberTexts - 1]}${text}`;
+            } else if(['/', 'f', 'L'].includes(text[0])) {  
+              groupedData[indexGroup].texts[numberTexts - 1] = `${groupedData[indexGroup].texts[numberTexts - 1]}${text}`;
+              //ate aqui
+            } else if(numberTexts > 2) {
               groupedData[indexGroup].texts[numberTexts - 1] = `${groupedData[indexGroup].texts[numberTexts - 1]}${text}`;
             } else {
               groupedData[indexGroup].texts.push(text);

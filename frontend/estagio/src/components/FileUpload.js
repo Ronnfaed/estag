@@ -44,10 +44,10 @@ const FileUpload = () => {
       <h2 style = {{textAlign: "center"}}>Upload de Arquivo PDF</h2>
       <form onSubmit={handleSubmit}>
         <div className="file-input-container">
-          <input type="file" onChange={handleFileChange} />
+          <input type="file" onChange={handleFileChange} style = {{display: 'flex', justifyContent: 'center'}}/>
         </div>
         <div>
-        <button type="submit" disabled={uploading} style = {{justifyItems:"center"}}>
+        <button type="submit" disabled={uploading} style = {{width: '100%', alignSelf: "center"}}>
             {uploading ? 'Enviando...' : 'Enviar'}
         </button>
         </div>
@@ -55,7 +55,7 @@ const FileUpload = () => {
 
       {jsonResult && (
         <div className="json-result-container">
-          <h3>Resultado em JSON</h3>
+          <h3 style = {{textAlign: "center"}}>Resultado em JSON</h3>
           <pre>{JSON.stringify(jsonResult, null, 2)}</pre>
         </div>
       )}

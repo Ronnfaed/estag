@@ -79,7 +79,9 @@ app.post('/upload', upload.single('pdf'), (req, res) => {
         }
       })
     })
-    res.json(groupedData);
+    // Remove yCoordinate from the final output
+    const finalOutput = groupedData.map(group => ({ texts: group.texts }));
+    res.json(finalOutput);
   });
 });
 configDotenv();

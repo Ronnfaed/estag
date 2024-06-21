@@ -79,8 +79,17 @@ app.post('/upload', upload.single('pdf'), (req, res) => {
         }
       })
     })
-    // Remove yCoordinate from the final output
-    const finalOutput = groupedData.map(group => ({ texts: group.texts }));
+    // Remove yCoordinate from the final output and format the texts
+    const finalOutput = groupedData.map(group => {
+      const [exame, valor, ref] = group.texts;
+      return {
+        texts: [
+          `Exame: ${exame}`,
+          `Valor: ${valor}`,
+          `Ref: ${ref}`
+        ]
+      };
+    });
     res.json(finalOutput);
   });
 });

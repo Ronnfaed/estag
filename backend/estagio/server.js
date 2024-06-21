@@ -9,21 +9,21 @@ const app = express();
 const upload = multer({ dest: 'uploads/' });
 
 function getSmallestY(data) {
-  // Initialize the smallest y with a large number
+  // Inicializa o menor valor do eixo Y com um numero infinito.
   let smallestY = Infinity;
   
-  // Extract the fills and texts
+  // Extração de todos os texts e as demais informações
   let fills = data.Pages[0].Fills;
   let texts = data.Pages[0].Texts;
   
-  // Check each fill's y value
+  // Verifica o valor posicional de cada fill, sempre em relação ao eixo y.
   fills.forEach(fill => {
       if (fill.y < smallestY) {
           smallestY = fill.y;
       }
   });
   
-  // Check each text's y value
+  // Verifica o valor posicional de cada texto, baseado no eixo y.
   texts.forEach(text => {
       if (text.y < smallestY) {
           smallestY = text.y;
@@ -38,7 +38,7 @@ app.post('/upload', upload.single('pdf'), (req, res) => {
     return res.status(400).json({ message: 'No file uploaded' });
   }
   const pdfFilePath = req.file.path;
-  // Use pdf2json to process the PDF file
+  // Utilização do pdf2json para processar o PDF
   const pdfParser = new pdf2json();
   pdfParser.loadPDF(pdfFilePath);
 
@@ -47,9 +47,9 @@ app.post('/upload', upload.single('pdf'), (req, res) => {
   );
   let groupedData = [];
   pdfParser.on('pdfParser_dataReady', pdfData => {
-    // Process pdfData as needed
-    // For example, filter or manipulate the data
-    fs.unlinkSync(pdfFilePath); // Delete the uploaded file after processing
+    // Processar os dados do PDF de acordo com a necessidade.
+    // No caso, para filtrar e manipular os dados.
+    fs.unlinkSync(pdfFilePath); // Deleta o PDF logo após o processamento.
 
     const firstRowCoordinate = getSmallestY(pdfData); //pega primeira row (Fills são os retangulos do pdf2json)
     pdfData.Pages.map((page) => {
@@ -87,7 +87,7 @@ app.post('/upload', upload.single('pdf'), (req, res) => {
         }
       })
     })
-    // Remove yCoordinate from the final output and format the texts
+    // Remove a menção da coordenada do eixo Y do texto extraído, e formata os dados coletados atribuindo a eles um prefixo de identificação.
     const finalOutput = groupedData.map(group => {
       const [exame, valor, ref] = group.texts;
       return {

@@ -23,7 +23,7 @@ após isso, acessar o frontend no respectivo endereço local onde ele foi montad
 
 utilizar para teste algum dos dois PDF's fornecidos aqui na pasta
 
-/estag/pdfSample
+\estag\pdfSample
 
 
 

@@ -14,6 +14,7 @@ estag\backend\estagio>nodemon server.js
 ## passo 3
 
 subir o frontend, através do seguinte comando:
+
 estag\frontend\estagio>npm start
 
 após isso, acessar o frontend no respectivo endereço local onde ele foi montado.
